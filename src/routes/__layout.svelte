@@ -19,7 +19,9 @@
 <main class="max-w-6xl mx-auto px-8">
 	<slot />
 
+	<!--
 	<pre class="w-96 overflow-scroll">
 		{JSON.stringify($session, null, 2)}
 	</pre>
+	-->
 </main>

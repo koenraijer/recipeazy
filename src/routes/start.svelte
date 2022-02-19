@@ -2,6 +2,9 @@
     import supabase from '$lib/db'
     import {goto} from '$app/navigation'
 
+    import * as THREE from 'three'
+    import * as SC from 'svelte-cubed'
+
     let email, password
     async function signUp() {
         const {user, session: sesh, error} = await supabase.auth.signUp({
@@ -31,9 +34,23 @@
          
         goto('/')
     }
+
+    let spin = 0
+
+    SC.onFrame(() => {
+        spin += .01
+    })
 </script>
 
-<h1 class="title prose text-8xl font-bold text-accent mx-auto text-center my-8">Recipeazy</h1>
+<h1 class="title prose text-9xl font-bold text-accent mx-auto text-center my-8">Recipeazy</h1>
+<div class="absolute w-[90vw] h-[90vh] -translate-y-[10vh] -z-10 left-[50vw] transform -translate-x-[50%] mx-auto">
+    <SC.Canvas class="absolute w-56 h-56" antialias background={new THREE.Color(250, 247, 245)} >
+        <SC.Mesh geometry={new THREE.TorusKnotGeometry()} rotation={[spin, spin, spin]}/>
+        <SC.PerspectiveCamera />
+        <SC.AmbientLight intensity={0.6} />
+	    <SC.DirectionalLight intensity={0.6} position={[-2, 3, 2]} />
+    </SC.Canvas>
+</div>
 <div class="card w-96 bg-base-100 my-8 mx-auto shadow-xl">
     <div class="card-body">
       <h2 class="card-title my-4">Sign up</h2>
