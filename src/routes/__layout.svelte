@@ -16,7 +16,7 @@
 	}
 </script>
 
-<main class="max-w-6xl mx-auto px-8">
+<main class="max-w-screen-lg min-h-screen overflow-x-hidden mx-auto px-4 md:px-8">
 	<slot />
 
 	<!--

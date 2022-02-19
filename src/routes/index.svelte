@@ -33,10 +33,10 @@
 </script>
 
 <div class="flex justify-between items-center py-4">
-    <h1 class="title prose text-3xl font-bold text-accent"><a class="no-underline font-bold" href="/">Recipeazy</a></h1>
+    <h1 class="title prose text-xl md:text-3xl font-bold text-accent"><a class="no-underline font-bold" href="/">Recipeazy</a></h1>
     <div>
         {#if $session}
-            <span class="px-4">{email}</span>
+            <span class="sm:visible hidden md:px-4">{email}</span>
         {/if}
         <button class="btn btn-primary" on:click={signOut}>Sign out</button>
     </div>
