@@ -4,7 +4,7 @@
 	import {session} from '$app/stores'
 	import {browser} from '$app/env'
 	import {goto} from '$app/navigation'
-	
+	import Header from '$lib/components/Header.svelte'
 	if (browser) {
 			$session = supabase.auth.session()
 			$session ? goto('/') : goto('/start')
@@ -16,12 +16,15 @@
 	}
 </script>
 
+
 <main class="max-w-screen-lg min-h-screen overflow-x-hidden mx-auto px-4 md:px-8">
+	<Header />
+
 	<slot />
 
 	<!--
-	<pre class="w-96 overflow-scroll">
-		{JSON.stringify($session, null, 2)}
-	</pre>
+		<pre class="w-96 overflow-scroll">
+			{JSON.stringify($session, null, 2)}
+		</pre>
 	-->
 </main>

@@ -3,9 +3,6 @@
     import {session} from '$app/stores'
     import {browser} from '$app/env'
     import CreateRecipe from '$lib/components/createRecipe.svelte'
-    async function signOut() {
-        const { error } = await supabase.auth.signOut()
-    }
 
     let email = ''
     function assignEmail() {
@@ -17,37 +14,26 @@
         assignEmail()
     }
 
-    async function getData() {
-        const {data, error} = await supabase
+    async function getUserRecipes() {
+        const {data: recipes, error} = await supabase
             .from('recipes')
             .select()
-        
+            .eq('user', email)
             if (error) throw new Error(error.message)
 
-            return data
+            return recipes
 
     }
 
-    getData();
-
+    console.log(supabase.auth.user())
 </script>
-
-<div class="flex justify-between items-center py-4">
-    <h1 class="title prose text-xl md:text-3xl font-bold text-accent"><a class="no-underline font-bold" href="/">Recipeazy</a></h1>
-    <div>
-        {#if $session}
-            <span class="sm:visible hidden md:px-4">{email}</span>
-        {/if}
-        <button class="btn btn-primary" on:click={signOut}>Sign out</button>
-    </div>
-</div>
 
 <CreateRecipe/>
 
 <h2 class="text-3xl font-bold">All recipes</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 items-stretch gap-12 my-12 ">
-        {#await getData()}
+        {#await getUserRecipes()}
         <span>Loading...</span>
         {:then data}
             {#each data as recipe}

@@ -1,18 +1,8 @@
 <script>
     import supabase from "$lib/db";
-
-    async function createPost({title, introduction, ingredients, instructions, user}) {
-            const {data, error} = await supabase
-                .from('recipes')
-                .insert({title, introduction, ingredients, instructions, user})
-            
-            if (error) throw new Error(error.message)
-
-            ingredients = []
-            instructions = []
-
-            return {data, error}
-    }
+    import {createPost} from '$lib/services'
+    import {addIngredient} from '$lib/services'
+    import {addInstruction} from '$lib/services'
 
     let title = ''
     let introduction = ''
@@ -22,22 +12,10 @@
     let instruction = ''
 
     let createPostPromise = Promise.resolve({})
+
     function handleCreatePost() {
         createPostPromise = createPost({user: supabase.auth.user().email, title: title, introduction: introduction, ingredients: ingredients, instructions: instructions})
     }
-
-    function addIngredient() {
-        ingredients.push(ingredient);
-        ingredient = '';
-        ingredients = ingredients
-    }
-
-    function addInstruction() {
-        instructions.push(instruction);
-        instruction = '';
-        instructions = instructions;
-    }
-
 </script>
 
 <div class="flex flex-col gap-12 my-12 flex-nowrap">
@@ -53,14 +31,14 @@
             
             <label for="recipeIngredient" class="label mt-6">Add an ingredient</label>
             <div class="flex justify-between">
-                <input id="recipeIngredient" required bind:value={ingredient} class="input w-full mr-6 border-white focus:outline-none border border-base-100 focus:bg-base-100 focus:border-base-content bg-base-200">
+                <input id="recipeIngredient" bind:value={ingredient} class="input w-full mr-6 border-white focus:outline-none border border-base-100 focus:bg-base-100 focus:border-base-content bg-base-200">
                 <button class="btn btn-outline px-6" type="button" on:click={addIngredient}>
                     Add
                 </button>
             </div>   
             <label for="recipeInstruction" class="label mt-6">Add an instruction</label>
             <div class="flex justify-between">
-                <input id="recipeInstruction" required bind:value={instruction} class="input w-full mr-6 border-white focus:outline-none border-base-100 focus:bg-base-100 focus:border-base-content bg-base-200">
+                <input id="recipeInstruction" bind:value={instruction} class="input w-full mr-6 border-white focus:outline-none border-base-100 focus:bg-base-100 focus:border-base-content bg-base-200">
                 <button type="button" class="btn px-6 btn-outline" on:click={addInstruction}>
                     Add
                 </button>

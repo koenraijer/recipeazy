@@ -1,7 +1,7 @@
 <script>
     import supabase from '$lib/db'
     import {goto} from '$app/navigation'
-
+    
     import * as THREE from 'three'
     import * as SC from 'svelte-cubed'
 
@@ -51,7 +51,7 @@
 	    <SC.DirectionalLight intensity={0.6} position={[-2, 3, 2]} />
     </SC.Canvas>
 </div>
-<div class="card w-full bg-base-100 my-8 mx-auto shadow-xl">
+<div class="card w-full sm:w-96 bg-base-100 my-8 mx-auto shadow-xl">
     <div class="card-body">
       <h2 class="card-title my-4">Sign up</h2>
       <div class="">
