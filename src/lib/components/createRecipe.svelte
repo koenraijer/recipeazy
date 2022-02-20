@@ -1,8 +1,18 @@
 <script>
     import supabase from "$lib/db";
     import {createPost} from '$lib/services'
-    import {addIngredient} from '$lib/services'
-    import {addInstruction} from '$lib/services'
+    
+    export function addIngredient() {
+    ingredients.push(ingredient);
+    ingredient = '';
+    ingredients = ingredients
+    }
+
+    export function addInstruction() {
+        instructions.push(instruction);
+        instruction = '';
+        instructions = instructions;
+    }
 
     let title = ''
     let introduction = ''

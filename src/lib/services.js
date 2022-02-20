@@ -17,18 +17,6 @@ export async function createPost({title, introduction, ingredients, instructions
     return {data, error}
 }
 
-export function addIngredient() {
-    ingredients.push(ingredient);
-    ingredient = '';
-    ingredients = ingredients
-}
-
-export function addInstruction() {
-    instructions.push(instruction);
-    instruction = '';
-    instructions = instructions;
-}
-
 export async function changeEmail() {
     const {user, error} = await supabase.auth.update({email: newEmail})
     if (error) throw new Error(error.message)
